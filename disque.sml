@@ -66,7 +66,6 @@ struct
 
   val parseInt = repeat1 digit wth valOf o Int.fromString o String.implode
 
-
   val bulk = join (string "$" >> parseInt << crlf wth
 		    (fn i => repeatn i (not crlf >> anyChar) << crlf wth
 				     (* FIX only 1 line... Handle null elements *)
@@ -113,7 +112,6 @@ sig
     val ackjob  : conn -> string list -> DisqueParser.reply
     val fastack : conn -> string list -> DisqueParser.reply
     val working : conn -> string -> DisqueParser.reply
-
 end
 
 structure Disque :> DISQUE =
@@ -161,7 +159,6 @@ fun recvdq s =
 	  Sum.INL e     => raise DisqueException ("Disque: " ^ e ^ " => " ^ bytes)
 	| Sum.INR r     => r
   end
-
 
 fun req conn msg
   = ( writedq(conn, msg ^ crlf)
